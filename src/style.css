@@ -48,7 +48,7 @@ body{
 .card__image{
     width: var(--card-width);
     height: var(--card-width);
-    object-fit: cover;
+    object-fit: contain;
 }
 .card__title{
     margin: 15px;
