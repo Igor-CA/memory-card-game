@@ -7,7 +7,6 @@
     --cor-4: #362e42;
     --cor-5: #000000;
     --card-width: 200px;
-    --card-height: 300px
 }
 
 *{
@@ -47,14 +46,9 @@ body{
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.496);
 }
 .card__image{
-    --image-width: calc(var(--card-width) - 20px);
-    display: block;
-    width: var(--image-width);
-    height: var(--image-width);
-    border: 2px solid black;
-    margin: 10px;
-    margin-bottom: 0px;
-    border-radius: 10px;
+    width: var(--card-width);
+    height: var(--card-width);
+    object-fit: cover;
 }
 .card__title{
     margin: 15px;
