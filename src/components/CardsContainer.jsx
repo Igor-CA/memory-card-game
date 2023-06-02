@@ -47,7 +47,7 @@ import hornet from '../images/B_Hornet2.png';
 
 import Card from './Card.jsx';
 
-export default function CardsContainer({props}){
+export default function CardsContainer(props){
 
     const allCards = [
         {name: 'Absolute radiance', image: absoluteRadiance},
@@ -95,14 +95,22 @@ export default function CardsContainer({props}){
         {name: 'Soul tyrant', image: soulTyrant},
         {name: 'Tiso God', image: tisoGod},
         {name: 'winged nosk', image: wingedNosk},
-
     ]
+
+    const currentList = [...allCards]
 
     return(
         <div className="game-container">
-            {allCards.map((card, index) => {
+            {allCards.map((card) => {
                 return(
-                    <Card image={card.image} title={card.name} key={index}></Card>
+                    <Card 
+                        image={card.image} 
+                        title={card.name} 
+                        addScore={props.addScore} 
+                        reset={props.reset} 
+                        key={card.title}
+                        visible={(currentList.indexOf(card) === -1)?false:true}
+                    ></Card>
                 )
             })}
         </div>
