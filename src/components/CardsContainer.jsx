@@ -42,18 +42,18 @@ import lostKin from '../images/Lost-Kin.png'
 import soulTyrant from '../images/Soul-Tyrant.png'
 import tisoGod from '../images/Tiso_God.png'
 import wingedNosk from '../images/Winged_Nosk.png'
-
 import hornet from '../images/B_Hornet2.png';
 
 import Card from './Card.jsx';
+import { useState } from 'react'
 
 export default function CardsContainer(props){
 
-    const allCards = [
+    const [allCards, setAllCards] = useState([
         {name: 'Absolute radiance', image: absoluteRadiance},
         {name: 'Broken vessel', image: brokenVessel},
         {name: 'Brooding mawlek', image: broodingMawlek},
-        {name: 'Crystal guardi', image: crystalGuardian},
+        {name: 'Crystal guardian', image: crystalGuardian},
         {name: 'Dung defender', image: dungDefender},
         {name: 'False knight', image: falseKnight},
         {name: 'Flukemarm', image: flukemarm},
@@ -94,21 +94,70 @@ export default function CardsContainer(props){
         {name: 'Lost Kin', image: lostKin},
         {name: 'Soul tyrant', image: soulTyrant},
         {name: 'Tiso God', image: tisoGod},
-        {name: 'winged nosk', image: wingedNosk},
-    ]
+        {name: 'Winged nosk', image: wingedNosk},
+    ])
 
-    const currentList = [...allCards]
+    let currentList = [...allCards]
 
+    const shuffleList = () => {
+        let allCardsCopy = [...allCards]
+        let cardsLength = allCardsCopy.length
+        for(let i=0; i < cardsLength; i++){
+            let j = Math.floor(Math.random() * cardsLength);
+            [allCardsCopy[i], allCardsCopy[j]] = [allCardsCopy[j], allCardsCopy[i]];
+        }
+        return allCardsCopy
+    }
+
+    const setCurrentList = () => {
+        let randomList = shuffleList().slice(0,10)
+        let notMarkedList = allCards.filter(card => !card.marked)
+        let needTrade = true
+        for(let i=0; i<randomList.length; i++){
+            if(notMarkedList.indexOf(randomList[i]) !== -1){
+                currentList = randomList
+                needTrade = false
+                break
+            }
+        }
+        if(needTrade){
+            if(notMarkedList.length > 0){
+                let randomIndex = Math.floor(Math.random() * randomList.length);
+                [randomList[randomIndex]] = [notMarkedList[0]]
+            }
+            else
+                resetMarks()
+        }
+        currentList = [...randomList]
+    }
+    
+    const resetMarks = () => {
+        let newArray = allCards.map(card => {return {...card, marked:false}})
+        setAllCards(newArray)
+    }
+
+    const setMarked = (cardName, state) => {
+        let newArray = allCards.map(card => {
+            if(cardName === card.name)
+                return {...card, marked:state}
+            return card
+        })
+        setAllCards(newArray)
+    }
+    
+    setCurrentList()
     return(
         <div className="game-container">
-            {allCards.map((card) => {
+            {allCards.map((card, index) => {
                 return(
                     <Card 
                         image={card.image} 
                         title={card.name} 
                         addScore={props.addScore} 
-                        reset={props.reset} 
-                        key={card.title}
+                        resetGame={props.resetGame}
+                        resetState={props.resetState} 
+                        setMark={setMarked}
+                        key={card.name}
                         visible={(currentList.indexOf(card) === -1)?false:true}
                     ></Card>
                 )

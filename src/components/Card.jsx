@@ -1,15 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function Card({image, title, addScore, reset, visible}){
+export default function Card(props){
+  const {image, title, addScore, resetGame, resetState, visible, setMark} = props
   const [clicked, setClicked] = useState(false)
+  
   const handleClick = () => {
     if(clicked)
-      reset()
+      resetGame()
     else{
       addScore()
       setClicked(!clicked)
+      setMark(title, !clicked)
     }
   }
+  useEffect(() => {
+    if(resetState)
+      setClicked(false)
+  }, [resetState])
   
   return(
       <div className={(visible)?'card':'card card--invisible'} onClick={handleClick}>
