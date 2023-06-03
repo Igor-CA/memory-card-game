@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "./Card.css"
 
 export default function Card(props){
   const {image, title, addScore, resetGame, resetState, visible, setMark} = props
@@ -20,8 +21,9 @@ export default function Card(props){
   
   return(
       <div className={(visible)?'card':'card card--invisible'} onClick={handleClick}>
-        <img src={image} alt="character" className="card__image"></img>
-        <br></br>
+        <div className="card__image-container">
+          <img src={image} alt="character" className="card__image"></img>
+        </div>
         <div className="card__title">{title}</div> 
       </div>
   )

@@ -1,3 +1,5 @@
+import './Header.css'
+
 export default function Header({score, highScore}) {
     return (
         <header className="game-header">

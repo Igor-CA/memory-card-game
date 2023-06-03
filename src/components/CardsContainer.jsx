@@ -46,6 +46,7 @@ import hornet from '../images/B_Hornet2.png';
 
 import Card from './Card.jsx';
 import { useState } from 'react'
+import './CardContainer.css'
 
 export default function CardsContainer(props){
 
@@ -110,7 +111,7 @@ export default function CardsContainer(props){
     }
 
     const setCurrentList = () => {
-        let randomList = shuffleList().slice(0,10)
+        let randomList = shuffleList().slice(0,12)
         let notMarkedList = allCards.filter(card => !card.marked)
         let needTrade = true
         for(let i=0; i<randomList.length; i++){
