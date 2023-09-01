@@ -32,5 +32,5 @@ in the console.
 
 ## Lessons Learned
 
-- Connecting [Firebase](https://firebase.google.com) to a React client.
-- Using [Firebase](https://firebase.google.com) as a backend and hosting server.
+- Use functional components in React.
+- Handling states and hooks.
