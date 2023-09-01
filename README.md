@@ -1,4 +1,4 @@
-# Where is ...? (Where is waldo)
+# Memory card game
 ### Description
 This game is a project from [The Odin Project](https://www.theodinproject.com/).
 
